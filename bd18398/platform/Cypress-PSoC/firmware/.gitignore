@@ -1,0 +1,22 @@
+# Build files
+/cypress-protocol-port.cydsn/CortexM3/
+/cypress-protocol-port.cydsn/*.log
+/cypress-protocol-port.cydsn/*.cycdx
+/cypress-protocol-port.cydsn/*.cyfit
+/cypress-protocol-port.cydsn/*.html
+/cypress-protocol-port.cydsn/*.svd
+/cypress-protocol-port.cydsn/*.rpt
+/cypress-protocol-port.cydsn/ComponentUpdateLog.txt
+
+# Generated code
+/cypress-protocol-port.cydsn/Generated_Source/
+/cypress-protocol-port.cydsn/codegentemp/
+/cypress-protocol-port.cydsn/src/version.h
+
+# Unnecessary IDE files
+/cypress-protocol-port.cydsn/Export/
+/cypress-protocol-port.cydsn/Backup/
+
+# Developer-specific IDE configuration files
+/cypress-protocol-port.cydsn/*.cywrk.*
+/cypress-protocol-port.cydsn/*.cyprj.*

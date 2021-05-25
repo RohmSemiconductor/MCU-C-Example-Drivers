@@ -1,0 +1,39 @@
+Evaluation features:
+
+3 channel LED operation
+  - Set channel current same
+  - Each channel same dimming
+    - Analog dimming (through 3 PWM lines from MCU)
+    - Digital dimming (via SPI bus)
+  - Limp-Home mode
+    - Fall back mode for "driving home"
+  - Individual channel setup
+    - Current setting
+    - PWM dimming
+  - Short circuit and open protection
+    - By 2 switches: Short to GND, Open
+  - Overcurrent protection
+    - By separate switch short to GND with resistor
+  - Thermal protection
+    - Monitor internal temperature and go into safe mode on high temp
+
+Demo Scenario
+
+1. Start
+2. Normal mode:
+   - LED #1 on board lights up (green)
+   - Go into LED active mode
+   - Set 1st channel to lit up LEDs
+3. Push button
+   - Channel 2 lit-up
+4. Push button
+   - Channel 3 lit-up
+5. Push button
+   - Ramp up/down all channels (w/ dimm)
+6. Push button
+   - Ramp up/down individual channels (w/ dimm)
+7. Push button
+   - Limb home
+8. Push button
+   - Start over
+

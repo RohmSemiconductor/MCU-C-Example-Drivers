@@ -1,0 +1,9 @@
+*.emProject -text
+# The inf-files will fail validation (hash mismatch) if EOL conversion is done.
+*.inf -text
+
+# Cypress project files are machine-generated and the content is not intended
+# for human consumption. The diffs are just noise.
+*.cyprj binary
+*.cywrk binary
+*.cydwr binary
