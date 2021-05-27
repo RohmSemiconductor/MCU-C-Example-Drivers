@@ -58,7 +58,7 @@ static void handle_uvlo()
 	evk_fault_all_leds();
 	limited_print("UVLO\r\n", 1000);
 	/* TODO: indicate fault using LED#2 on EVK board */
-	led_demo_err_led_blink_if_free(true);
+	led_demo_err_led_blink_if_free(false);
 }
 
 static void handle_pinuvlo()

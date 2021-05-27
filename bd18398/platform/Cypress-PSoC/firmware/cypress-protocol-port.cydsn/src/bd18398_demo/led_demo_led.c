@@ -289,14 +289,15 @@ static void LED_user_handler_short(struct bd18398_led *_this
 	 * printf("User SHORT handler for led %d\r\n", _this->id);
 	 * printf("Extra message: %s\r\n", (char *)opaque);
 	 */
-	led_demo_err_led_blink_if_free(true);
+	/* The SHORT error should have precedence. Blink fast unconditionally */
+	led_demo_err_led_blink(true);
 }
 
 static void LED_user_handler_open(struct bd18398_led *_this
 				  __attribute__((unused)), void *opaque
 				  __attribute__((unused)))
 {
-	led_demo_err_led_blink_if_free(true);
+	led_demo_err_led_blink_if_free(false);
 	/* printf("User OPEN handler for led %d\r\n", _this->id); */
 }
 
