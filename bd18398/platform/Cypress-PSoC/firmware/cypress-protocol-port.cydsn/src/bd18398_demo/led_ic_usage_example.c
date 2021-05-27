@@ -186,7 +186,6 @@ extern void led_demo_board_led_loop(void);
 /* The MCU-only demo mode main loop. */
 void led_demo_loop(void)
 {
-	static int test_var = 0;
 	static int state = -1;
 	uint8_t status;
 
@@ -213,13 +212,11 @@ void led_demo_loop(void)
 		 * Please note, the error handling is not re-entrant or
 		 * thread-safe
 		 */
-		if (!(test_var % 500)) {
-			if (is_failure_detected(&status)) {
-				handle_errors(status);
-			} else {
-				led_demo_err_led_off();
-				led_demo_ind_led_on();
-			}
+		if (is_failure_detected(&status)) {
+			handle_errors(status);
+		} else {
+			led_demo_err_led_off();
+			led_demo_ind_led_on();
 		}
 	} else {
 		led_demo_ind_led_off();
