@@ -45,9 +45,9 @@
 
 /*
  * When we change LED from 0 => full => 0 in 'smooth' way
- * we increase or decrease current in register once / ms
+ * we increase or decrease current in register once / 3 ms
  */
-#define LED_SMOOTH_CYCLE_MS	1
+#define LED_SMOOTH_CYCLE_MS	3
 #define LED_SMOOTH_CYCLE_FULL	(LED_SMOOTH_CYCLE_MS * BRIGHTNESS_MAX)
 #define LED_TIMING_MASK		0xf0
 #define LED_PATTERN_MASK	0x0f
