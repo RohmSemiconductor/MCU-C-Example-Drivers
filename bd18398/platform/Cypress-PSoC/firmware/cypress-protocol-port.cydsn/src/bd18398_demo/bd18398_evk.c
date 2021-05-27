@@ -70,13 +70,13 @@ int bd18398_evk_config()
 
 	/* DS2 bug - chipselect must be set LOW to start the IC */
 	spi_drv_set_ncs();
-	CyDelay(1);
+	LED_DEMO_DELAY_MS(1);
 	spi_drv_clear_ncs();
 
 	led_demo_reset();
-	CyDelay(200);
+	LED_DEMO_DELAY_MS(200);
 	spi_drv_set_ncs();
-	CyDelay(1);
+	LED_DEMO_DELAY_MS(1);
 	spi_drv_clear_ncs();
 
 	led_demo_enable_wlock();
