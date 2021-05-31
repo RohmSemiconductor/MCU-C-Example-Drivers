@@ -1,22 +1,21 @@
 # Build files
-/cypress-protocol-port.cydsn/CortexM3/
-/cypress-protocol-port.cydsn/*.log
-/cypress-protocol-port.cydsn/*.cycdx
-/cypress-protocol-port.cydsn/*.cyfit
-/cypress-protocol-port.cydsn/*.html
-/cypress-protocol-port.cydsn/*.svd
-/cypress-protocol-port.cydsn/*.rpt
-/cypress-protocol-port.cydsn/ComponentUpdateLog.txt
+/bd18398-demo.cydsn/CortexM3/
+/bd18398-demo.cydsn/*.log
+/bd18398-demo.cydsn/*.cycdx
+/bd18398-demo.cydsn/*.cyfit
+/bd18398-demo.cydsn/*.html
+/bd18398-demo.cydsn/*.svd
+/bd18398-demo.cydsn/*.rpt
+/bd18398-demo.cydsn/ComponentUpdateLog.txt
 
 # Generated code
-/cypress-protocol-port.cydsn/Generated_Source/
-/cypress-protocol-port.cydsn/codegentemp/
-/cypress-protocol-port.cydsn/src/version.h
+/bd18398-demo.cydsn/Generated_Source/
+/bd18398-demo.cydsn/codegentemp/
 
 # Unnecessary IDE files
-/cypress-protocol-port.cydsn/Export/
-/cypress-protocol-port.cydsn/Backup/
+/bd18398-demo.cydsn/Export/
+/bd18398-demo.cydsn/Backup/
 
 # Developer-specific IDE configuration files
-/cypress-protocol-port.cydsn/*.cywrk.*
-/cypress-protocol-port.cydsn/*.cyprj.*
+/bd18398-demo.cydsn/*.cywrk.*
+/bd18398-demo.cydsn/*.cyprj.*

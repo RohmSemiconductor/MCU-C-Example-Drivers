@@ -6,7 +6,7 @@ enable/disable states on a ROHM BD18398 connected to Cypress CY8CKIT-059.
 Precompiled binary can be found from bin/ folder.
 
 Sources can be found from
-bd18398/platform/Cypress-PSoC/firmware/cypress-protocol-port.cydsn/src
+bd18398/platform/Cypress-PSoC/firmware/bd18398-demo.cydsn/src
 
 Cypress PSOC Creator 4.4 can be used to compile the sources. More
 information can be found from
