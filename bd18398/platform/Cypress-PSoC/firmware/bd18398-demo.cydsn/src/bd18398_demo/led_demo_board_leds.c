@@ -56,30 +56,22 @@ static void led_demo_set_board_led(int num, bool state)
 			       EVKIT_GPIO_PIN_DRIVELOW,});
 }
 
-enum board_led_state {
-	ERR_LED_OFF,
-	ERR_LED_ON,
-	ERR_LED_BLINK_SLOW_STARTING,
-	ERR_LED_BLINK_SLOW,
-	ERR_LED_BLINK_FAST_STARTING,
-	ERR_LED_BLINK_FAST,
-};
-
 struct board_led {
 	enum board_led_state state;
 	uint32_t last_access;
 	bool lit;
+	bool inverted;
 	int nmbr;
 };
 
 static void shut_board_led(struct board_led *l)
 {
-	led_demo_set_board_led(l->nmbr, false);
+	led_demo_set_board_led(l->nmbr, l->inverted);
 }
 
 static void lit_board_led(struct board_led *l)
 {
-	led_demo_set_board_led(l->nmbr, true);
+	led_demo_set_board_led(l->nmbr, !l->inverted);
 }
 
 static void brd_led_toggle(struct board_led *l)
@@ -112,8 +104,8 @@ static void led_demo_board_led_blink(struct board_led *el, bool fast)
 	}
 }
 
-static struct board_led g_err_led = { 0, 0, 0,.nmbr = LED_DEMO_ERR_LED };
-static struct board_led g_ind_led = { 0, 0, 0,.nmbr = LED_DEMO_IND_LED };
+static struct board_led g_err_led = { 0, 0, 0, .inverted = true, .nmbr = LED_DEMO_ERR_LED };
+static struct board_led g_ind_led = { 0, 0, 0, .inverted = false, .nmbr = LED_DEMO_IND_LED };
 
 void led_demo_err_led_blink(bool fast)
 {
@@ -122,8 +114,8 @@ void led_demo_err_led_blink(bool fast)
 
 int led_demo_err_led_blink_if_free(bool fast)
 {
-	if (g_err_led.state != ERR_LED_OFF && g_err_led.state != ERR_LED_ON)
-		return -EBUSY;
+	if (g_err_led.state != ERR_LED_OFF)
+		return g_err_led.state;
 
 	led_demo_board_led_blink(&g_err_led, fast);
 
@@ -163,7 +155,7 @@ void led_demo_err_led_off(void)
 	 * The ERR Led control logic is inverted. 
 	 * When line is HIGH, ERR LED is OFF
 	 */
-	led_demo_board_led_on(&g_err_led);
+	led_demo_board_led_off(&g_err_led);
 }
 
 void led_demo_err_led_on(void)
@@ -172,7 +164,7 @@ void led_demo_err_led_on(void)
 	 * The ERR Led control logic is inverted. 
 	 * When line is HIGH, ERR LED is OFF
 	 */
-	led_demo_board_led_off(&g_err_led);
+	led_demo_board_led_on(&g_err_led);
 }
 
 void led_demo_ind_led_off(void)

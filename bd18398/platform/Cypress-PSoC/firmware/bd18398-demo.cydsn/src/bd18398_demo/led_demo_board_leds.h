@@ -35,6 +35,15 @@
 #define SLOW_BLINK_US 1000000
 #define FAST_BLINK_US 100000
 
+enum board_led_state {
+	ERR_LED_OFF,
+	ERR_LED_ON,
+	ERR_LED_BLINK_SLOW_STARTING,
+	ERR_LED_BLINK_SLOW,
+	ERR_LED_BLINK_FAST_STARTING,
+	ERR_LED_BLINK_FAST,
+};
+
 void led_demo_err_led_blink(bool fast);
 void led_demo_err_led_off(void);
 void led_demo_err_led_on(void);

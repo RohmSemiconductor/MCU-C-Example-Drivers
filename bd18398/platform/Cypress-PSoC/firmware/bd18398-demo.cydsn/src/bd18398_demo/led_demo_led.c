@@ -280,6 +280,8 @@ static void LED_user_handler_short(struct bd18398_led *_this
 				   __attribute__((unused)), void *opaque
 				   __attribute__((unused)))
 {
+	static int ctr[BD18398_NUM_LEDS] = {0};
+
 	/*
 	 * You can enable these prints just to test how the opaque ptr can be
 	 * used. That frequent printing is likely to render the demo pretty
@@ -289,16 +291,32 @@ static void LED_user_handler_short(struct bd18398_led *_this
 	 * printf("User SHORT handler for led %d\r\n", _this->id);
 	 * printf("Extra message: %s\r\n", (char *)opaque);
 	 */
-	/* The SHORT error should have precedence. Blink fast unconditionally */
-	led_demo_err_led_blink(true);
+	if (!(ctr[_this->id] % 1000))
+		printf("User SHORT handler for led %d\r\n", _this->id);
+
+	ctr[_this->id]++;
+	/* The SHORT error should have precedence. Turn ON unconditionally */
+	led_demo_err_led_on();
 }
 
 static void LED_user_handler_open(struct bd18398_led *_this
 				  __attribute__((unused)), void *opaque
 				  __attribute__((unused)))
 {
-	led_demo_err_led_blink_if_free(false);
-	/* printf("User OPEN handler for led %d\r\n", _this->id); */
+	static int ctr[BD18398_NUM_LEDS] = {0};
+	int old_state;
+
+	if (!(ctr[_this->id] % 1000))
+		printf("User OPEN handler for led %d\r\n", _this->id);
+	ctr[_this->id]++;
+
+	/*
+	 * OPEN error should start blinking FAST. Don't blink if we are
+	 * indicating SHORT by constantly burining LED
+	 */
+	old_state = led_demo_err_led_blink_if_free(true);
+	if (old_state != ERR_LED_ON && old_state != ERR_LED_BLINK_FAST)
+		led_demo_err_led_blink(true);
 }
 
 /*
