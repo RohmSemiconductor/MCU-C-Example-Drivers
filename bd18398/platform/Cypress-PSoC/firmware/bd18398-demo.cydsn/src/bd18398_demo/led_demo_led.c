@@ -252,7 +252,7 @@ void evk_led_loop()
 			{
 				uint16_t brightness;
 
-				if (1000 > get_us_since(l->last_acces))
+				if (LED_SMOOTH_CYCLE_MS * 1000 > get_us_since(l->last_acces))
 					break;
 				else
 					l->smooth_bright =
