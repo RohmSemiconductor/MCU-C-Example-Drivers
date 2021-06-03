@@ -1,4 +1,4 @@
-# cypress-protocol-port
+# ROHM BD18398 EVK stand-alone demo.
 
 Simple example code running on the
 [Cypress CY8CKIT-059](http://www.cypress.com/CY8CKIT-059) connected to the
@@ -55,15 +55,6 @@ connect the KitProg USB to the PC.
 3. Use `File->Program` to program the device.
 
 [PSoC Programmer]: http://www.cypress.com/products/psoc-programming-solutions
-
-
-## USB drivers
-
-On Windows 10, the operating system should automatically use the correct
-driver. Earlier versions of Windows cannot automatically find the CDC driver
-and will need to install `inf`. One option is to use the unsigned `inf` file
- that is generated as part of the build process
-(`bd18398-demo.cydsn/Generated_Source/PSoC5/USBFS_cdc.inf`).
 
 
 ## Pin and bus1 configuration
