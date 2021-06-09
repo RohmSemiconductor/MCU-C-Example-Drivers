@@ -84,7 +84,6 @@ int led_demo_set_config()
 static void led_demo_next_state(int *state)
 {
 	*state = ((*state + 1) % STANDALONE_STATE_LAST);
-	printf("button push detected - state %u\r\n", *state);
 }
 
 /* Functions for state specific actions. */
@@ -170,16 +169,6 @@ static void led_demo_set_state5(void)
 	led_demo_err_led_off();
 }
 
-/* Function to cleat all cahced falts from LEDs */
-bool clear_faults()
-{
-	if (!evk_any_led_faulty())
-		return false;
-
-	evk_fault_cancel_all_leds();
-	return true;
-}
-
 extern void tiktak(void);
 extern void led_demo_board_led_loop(void);
 
@@ -212,8 +201,49 @@ void led_demo_loop(void)
 		 * Please note, the error handling is not re-entrant or
 		 * thread-safe
 		 */
+
 		if (is_failure_detected(&status)) {
+			uint8_t cleared_led_errors[3] = {0};
+			uint8_t active_led_errors[3] = {0};
+			uint8_t clr_err_stack;
+			uint8_t act_err_stack;
+
+			/* We don't turn OFF led at fault. Thus we can just
+			 * zero all faults here and allow the remaining faults
+			 * to be triggered by following status polling.
+			 * This keeps cached fault status Ok and we can toggle
+			 * board LED state (orange) according to the active
+			 * errors.
+			 */
+			evk_fault_cancel_all_leds(&cleared_led_errors[0], 3);
 			handle_errors(status);
+			evk_get_led_errors(&active_led_errors[0], 3);
+
+			clr_err_stack = (cleared_led_errors[0] | cleared_led_errors[1] | cleared_led_errors[2]);
+			act_err_stack = (active_led_errors[0] | active_led_errors[1] | active_led_errors[2]);
+
+#ifdef DBG_PRINT_LED_ERR_STATUS_CHANGES
+			if (cleared_led_errors[0] != active_led_errors[0] || cleared_led_errors[1] != active_led_errors[1] || cleared_led_errors[2] != active_led_errors[2])
+				printf("LED error status change - prev 0x%x 0x%x 0x%x now 0x%x 0x%x 0x%x\r\n", cleared_led_errors[0], cleared_led_errors[1], cleared_led_errors[2], active_led_errors[0], active_led_errors[1], active_led_errors[2]);
+#endif
+			/*
+			 * Handle clearing the error LED state if some errors
+			 * have vanished. If we have SHORT active - we will
+			 * leave LED on. (clear nothing).
+			 * If we don't. We check if either SHORT or OPEN were
+			 * cleared. If they have, then we free the LED so that
+			 * at next loop any less prioritized errors will be
+			 * reflected by the LED.
+			 */
+			if (!LED_SHORT(act_err_stack)) {
+				if (LED_SHORT(clr_err_stack))
+					led_demo_err_led_off();
+
+				if (!LED_OPEN(act_err_stack) &&
+				    LED_OPEN(clr_err_stack))
+					led_demo_err_led_off();
+			}
+
 		} else {
 			led_demo_err_led_off();
 			led_demo_ind_led_on();

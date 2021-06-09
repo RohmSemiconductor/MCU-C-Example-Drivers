@@ -32,6 +32,10 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include "bd18398.h"
+
+#define LED_OPEN(status) ((status) & BIT(BD18398_LED_ERR_BIT_LOD))
+#define LED_SHORT(status) ((status) & BIT(BD18398_LED_ERR_BIT_LSD))
 
 struct bd18398_led;
 
@@ -69,10 +73,10 @@ struct bd18398_led {
 	void *sw_ocp_opaq;
 	void (*handle_led_ocp)(struct bd18398_led * led, void *opaque);	///< led over-current
 	void *led_ocp_opaq;
-	bool (*is_faulty)(struct bd18398_led * _this);	///< has LED been set faulty
+	int (*is_faulty)(struct bd18398_led * _this);	///< has LED been set faulty
 
 	/* TODO: Change these internal? */
-	int (*set_faulty)(struct bd18398_led * _this);	///< set LED as faulty.
+	int (*set_faulty)(struct bd18398_led * _this, uint8_t status);	///< set LED as faulty.
 	int (*fault_cancel)(struct bd18398_led * _this);	///< Cancel LED fault state
 };
 

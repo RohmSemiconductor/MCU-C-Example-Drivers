@@ -28,6 +28,14 @@
 #ifndef BD19298_EVK_H
 #define BD19298_EVK_H
 
+/*
+ * Defining the DBG_PRINT_LED_ERR_STATUS_CHANGES will cause
+ * print to be emitted when change at LED channel error
+ * status bits is noticed.
+ */
+
+/* #define DBG_PRINT_LED_ERR_STATUS_CHANGES */
+
 int bd18398_evk_config();
 
 #endif

@@ -42,12 +42,12 @@
 #include "led_demo_spi.h"
 #include "bd18398_led.h"
 
-#define RETURN_IF_LED_NOT_SANE(__this) {                \
-	if (!(__this) || (__this)->id > LED_MAX_INDEX) {    \
-        printf("%s: Bad LED ID\r\n", __func__);         \
-                                                        \
-		return -EINVAL;                                 \
-    }                                                   \
+#define RETURN_IF_LED_NOT_SANE(__this) {			\
+	if (!(__this) || (__this)->id > LED_MAX_INDEX) {	\
+		printf("%s: Bad LED ID\r\n", __func__);		\
+								\
+	return -EINVAL;						\
+	}							\
 }
 /* The BD18398 EVK has 3 LED channels */
 static struct bd18398_led __evk_leds[3] = {
@@ -250,6 +250,9 @@ static int led_set_brightness(struct bd18398_led *_this, uint16_t brightness)
 	/* Sanity checks */
 	RETURN_IF_LED_NOT_SANE(_this);
 
+	if (!_this->cached_enabled)
+		return 0;
+
 	if (brightness > BRIGHTNESS_MAX) {
 		printf("%s: Invalid brightness 0x%hx\r\n", __func__,
 		       brightness);
@@ -271,42 +274,49 @@ static uint16_t led_get_brightness(struct bd18398_led *_this)
 	return _this->cached_brightness;
 }
 
-static int led_fault(struct bd18398_led *_this)
+static int led_fault(struct bd18398_led *_this, uint8_t status)
 {
 	/* Sanity checks */
 	RETURN_IF_LED_NOT_SANE(_this);
 
+	_this->fault = status;
+
 	/*
-	 * This is not the correct thing-to-do. We should probably disable
-	 * failing LED but the demo env gives OPEN/SHORT errors all the time.
-	 * Thus we leave the LED ON.
+	 * This does not fell like the correct thing-to-do. We should probably
+	 * disable failing LED channel but the demo env gives OPEN errors all
+	 * the time. We do also want to show the protection errors - and if we
+	 * turn OFF the LED we're likely to mitigate the error. Thus we
+	 * intentionally leave the LED ON in this demo code.
 	 */
+	/* return _this->off(_this); */
+
 	return 0;
-
-	if (_this->fault)
-		return 0;
-
-	_this->fault = true;
-
-	return _this->off(_this);
 }
 
-static bool led_is_faulty(struct bd18398_led *_this)
+/* Return the fault flags (zero if no faults) or negative number on error */
+static int led_is_faulty(struct bd18398_led *_this)
 {
 	RETURN_IF_LED_NOT_SANE(_this);
 
 	return _this->fault;
 }
 
+/*
+ * Clear cached fault flag.
+ * Return the previous fault flags or negative number on error.
+ */
 static int led_fault_cancel(struct bd18398_led *_this)
 {
+	uint8_t ret;
+
 	RETURN_IF_LED_NOT_SANE(_this);
 	if (!_this->fault)
 		return 0;
 
-	_this->fault = false;
+	ret = _this->fault;
+	_this->fault = 0;
 
-	return 0;
+	return ret;
 }
 
 static uint16_t compute_iset(unsigned int mA)
@@ -425,7 +435,7 @@ static int _led_init(struct bd18398_led *_this)
 	_this->fault_cancel = led_fault_cancel;
 	_this->is_enabled = led_is_enabled;
 	_this->handle_led_ocp = _this->handle_sw_ocp = _this->handle_lod =
-	    _this->handle_lsd = NULL;
+		_this->handle_lsd = NULL;
 	_this->dimm_on = led_dimm_on;
 	_this->dimm_off = led_dimm_off;
 	_this->initialized = true;
@@ -544,7 +554,7 @@ static void led_err(struct bd18398_led *led)
 		}
 	}
 	/* Fault (and turn OFF) LED which indicates error */
-	led->set_faulty(led);
+	led->set_faulty(led, ledstatus);
 /*	The demo env I have sets short/open error bits all the time.
  *	Can't turn off the LED for demo.
  *	led->off(led);

@@ -77,10 +77,18 @@ struct led_demo_led {
 
 static struct led_demo_led g_leds[BD18398_NUM_LEDS] = { {0, 0, 0, 0, 0} };
 
+/*
+ * This gets called when a non LED error is detected. In this demo
+ * environment this is a nop.
+ *
+ * The LED channel specific errors are indicated directly using
+ * the bd18398_led (led_hw in this file) - layer's 'led error handler' which
+ * parses the status registers for LED channels.
+ */
 static int evk_led_fault(int led_no)
 {
 	struct led_demo_led *l = &g_leds[led_no];
-	struct bd18398_led *led_hw;
+	struct bd18398_led *led_hw __attribute__((unused));
 
 	if (led_no > LED_MAX_INDEX || !l->led_hw)
 		return -EINVAL;
@@ -88,18 +96,20 @@ static int evk_led_fault(int led_no)
 	led_hw = l->led_hw;
 
 	/*
-	 * This is not the correct thing-to-do. We should disable
-	 * failing LED but the demo env gives OPEN/SHORT errors all the time.
+	 * This is not feel like the correct thing-to-do. We should probably disable
+	 * failing LED. Well, we may want to demonstrate how HW copes with the LED
+	 * errors - which is kind of hard if we turn off the LEDs.
 	 * Thus we leave the LED ON.
 	 */
 	return 0;
-
+	/*
 	if (led_hw->is_faulty(led_hw))
 		return 0;
 
-	led_hw->set_faulty(led_hw);
+	led_hw->set_faulty(led_hw, 0xff);
 
 	return led_hw->off(led_hw);
+	*/
 }
 
 static int evk_led_fault_cancel(int led_no)
@@ -109,23 +119,30 @@ static int evk_led_fault_cancel(int led_no)
 	int ret;
 
 	if (led_no > LED_MAX_INDEX || !l->led_hw)
-		return -EINVAL;
+		return 0;
 
 	led_hw = l->led_hw;
 
-	if (!led_hw->is_faulty(led_hw))
-		return 0;
-
 	ret = led_hw->fault_cancel(led_hw);
-	if (ret)
-		return ret;
+	if (ret < 0)
+		return 0;
+	/*
+	 * The EVK DS2 has problem which causes OPEN error to be detected
+	 * all the time. Thus we do not shut down LEDs on errors and we don't
+	 * need to enable them here.
+	 *
+	 * Furthermore, the fault cancel is now called unconditionally prior
+	 * status reading so this would cause LEDs to just flicker.
+	 */
+	/* return led_hw->on(led_hw); */
 
-	return led_hw->on(led_hw);
+	return ret;
 }
 
-static inline void set_all_leds_fault(bool fault)
+/* Set state of all EVK LEDs */
+static inline int set_all_leds_fault(uint8_t *s, int num, bool fault)
 {
-	int i;
+	int i, tmp;
 	int (*f)(int);
 
 	if (fault)
@@ -133,11 +150,17 @@ static inline void set_all_leds_fault(bool fault)
 	else
 		f = evk_led_fault_cancel;
 
-	for (i = 0; i < BD18398_NUM_LEDS; i++)
-		f(i);
+	for (i = 0; i < BD18398_NUM_LEDS; i++) {
+		tmp = f(i);
+		if (tmp < 0)
+			return tmp;
+		if (num > i)
+			s[i] = tmp;
+	}
+
+	return 0;
 }
 
-/* Set state of all EVK LEDs */
 bool evk_any_led_faulty(void)
 {
 	int i;
@@ -150,14 +173,31 @@ bool evk_any_led_faulty(void)
 	return false;
 }
 
-void evk_fault_cancel_all_leds()
+int evk_fault_cancel_all_leds(uint8_t *s, int num)
 {
-	set_all_leds_fault(false);
+	return set_all_leds_fault(s, num, false);
+}
+
+int evk_get_led_errors(uint8_t *s, int num)
+{
+	int i;
+	uint8_t led_faults;
+
+	for (i = 0; i < BD18398_NUM_LEDS; i++)
+		if (g_leds[i].led_hw) {
+			led_faults = g_leds[i].led_hw->is_faulty(g_leds[i].led_hw);
+			if (led_faults < 0)
+				return led_faults;
+			if (i < num)
+				s[i] = led_faults;
+		}
+
+	return 0;
 }
 
 void evk_fault_all_leds()
 {
-	set_all_leds_fault(true);
+	set_all_leds_fault(NULL, 0, true);
 }
 
 /* Set simple 'LED patterns' */
@@ -180,10 +220,16 @@ int evk_led_set_state(int led_no, uint8_t new_pattern, uint8_t new_timing)
 		return -EINVAL;
 	}
 
+	/*
+	 * With the specific EVKs we do always have OPEN error active. So
+	 * we allow setting states even when faults are indicated
+	 */
+	/*
 	if (led_hw->is_faulty(led_hw)) {
 		printf("set_led_state: Led marked faulty - bailing out\r\n");
 		return 0;
 	}
+	*/
 
 	l->led_flags &= (~LED_TIMING_MASK);
 	l->led_flags |= (new_timing & LED_TIMING_MASK);
@@ -239,12 +285,16 @@ void evk_led_loop()
 
 		if (!led_hw)
 			continue;
-
+	/*
+	 * With the specific EVKs we do always have OPEN error active. So
+	 * we allow setting states even when faults are indicated
+	 */
+	/*
 		if (led_hw->is_faulty(led_hw)) {
 			printf("LED %d faulty - skipping handling\r\n", i);
 			continue;
 		}
-
+	*/
 		timing = (l->led_flags & LED_TIMING_MASK);
 		pattern = (l->led_flags & LED_PATTERN_MASK);
 		switch (pattern) {
@@ -291,7 +341,7 @@ static void LED_user_handler_short(struct bd18398_led *_this
 	 * printf("User SHORT handler for led %d\r\n", _this->id);
 	 * printf("Extra message: %s\r\n", (char *)opaque);
 	 */
-	if (!(ctr[_this->id] % 1000))
+	if (!(ctr[_this->id] % 10000))
 		printf("User SHORT handler for led %d\r\n", _this->id);
 
 	ctr[_this->id]++;
@@ -306,7 +356,7 @@ static void LED_user_handler_open(struct bd18398_led *_this
 	static int ctr[BD18398_NUM_LEDS] = {0};
 	int old_state;
 
-	if (!(ctr[_this->id] % 1000))
+	if (!(ctr[_this->id] % 10000))
 		printf("User OPEN handler for led %d\r\n", _this->id);
 	ctr[_this->id]++;
 

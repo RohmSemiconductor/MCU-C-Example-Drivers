@@ -34,13 +34,14 @@
 /* Query LED fault state (cached) */
 bool evk_any_led_faulty(void);
 
-/* Mark LED(s) faulty and turn em OFF */
+/* Mark LED(s) faulty */
 void evk_fault_all_leds(void);
 
 /* Clear faulty mark and re-enable */
-void evk_fault_cancel_all_leds(void);
+int evk_fault_cancel_all_leds(uint8_t *status, int num_status);
 int evk_initialize_leds(void);
 void evk_led_loop(void);
+int evk_get_led_errors(uint8_t *status, int num_status);
 
 /* Set LED pattern and timing */
 /* LED patterns */
