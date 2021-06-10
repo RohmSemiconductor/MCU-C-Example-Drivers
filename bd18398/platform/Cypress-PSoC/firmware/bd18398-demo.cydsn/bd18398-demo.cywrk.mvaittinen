@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="bd18398-demo\bd18398-demo\Source Files\bd18398_demo\led_demo_led.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="bd18398-demo\bd18398-demo\Header Files\bd18398_demo\bd18398_evk.h">
 <ExpandedNodeIds>
 <v>bd18398-demo</v>
 <v>bd18398-demo\bd18398-demo</v>
@@ -69,15 +69,6 @@
 <v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
-<v>bd18398-demo</v>
-<v>bd18398-demo\bd18398-demo</v>
-<v>bd18398-demo\bd18398-demo\TopDesign</v>
-<v>bd18398-demo\bd18398-demo\bd18398-demo.cydwr</v>
-<v>bd18398-demo\bd18398-demo\bd18398-demo.cydwr\Pins</v>
-<v>bd18398-demo\bd18398-demo\bd18398-demo.cydwr\Analog</v>
-<v>bd18398-demo\bd18398-demo\bd18398-demo.cydwr\Clocks</v>
-<v>bd18398-demo\bd18398-demo\bd18398-demo.cydwr\Interrupts</v>
-<v>bd18398-demo\bd18398-demo\bd18398-demo.cydwr\DMA</v>
 <v>bd18398-demo\bd18398-demo\bd18398-demo.cydwr\System</v>
 <v>bd18398-demo\bd18398-demo\bd18398-demo.cydwr\Directives</v>
 <v>bd18398-demo\bd18398-demo\bd18398-demo.cydwr\Flash Security</v>
@@ -114,29 +105,6 @@
 <v>bd18398-demo\bd18398-demo\Source Files\evkit</v>
 <v>bd18398-demo\bd18398-demo\Source Files\gpio_adapter.c</v>
 <v>bd18398-demo\bd18398-demo\Source Files\gpio_spec.c</v>
-<v>bd18398-demo\bd18398-demo\Source Files\main.c</v>
-<v>bd18398-demo\bd18398-demo\Source Files\pwm_adapter.c</v>
-<v>bd18398-demo\bd18398-demo\Source Files\spi_driver.c</v>
-<v>bd18398-demo\bd18398-demo\Source Files\syscall.c</v>
-<v>bd18398-demo\bd18398-demo\Source Files\util.c</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\CLK_PWM</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\cy_boot</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\GPIO_P0_1</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\GPIO_P1_0</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\GPIO_P1_1</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\GPIO_P12_0</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\GPIO_P12_2</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\GPIO_P15_0</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\GPIO_P15_1</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\GPIO_P2_0</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\GPIO_P3_0</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\GPIO_P3_1</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\GPIO_P3_2</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\ISR_GPIO_P0_1</v>
-<v>bd18398-demo\bd18398-demo\Generated_Source\PSoC5\ISR_GPIO_P1_1</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -362,38 +330,6 @@
 <v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\ISR_GPIO_P1_1.lst</v>
 <v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\ISR_GPIO_P12_2.lst</v>
 <v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\ISR_GPIO_P2_0.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\ISR_GPIO_P3_0.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\led_demo_board_leds.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\led_demo_button.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\led_demo_led.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\led_demo_spi.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\led_demo_time.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\led_ic_usage_example.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_0.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_0_PM.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_1.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_1_PM.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_2.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_2_PM.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\pwm_adapter.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\REG_PWM_0.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\REG_PWM_0_PM.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\REG_PWM_1.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\REG_PWM_1_PM.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\REG_PWM_2.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\REG_PWM_2_PM.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\spi_driver.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_CLK.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_INT.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\SPIM_PM.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\syscall.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\TIMER_0.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\TIMER_0_PM.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\TIMER_0_RST.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\TIMER_0_RST_PM.lst</v>
-<v>bd18398-demo\bd18398-demo\CortexM3\ARM_GCC_541\Debug\Listing Files\TIMER_1.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -477,7 +413,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="2946, 1071" SelectedTabbedMdiWindow="f4503687-2a54-4859-865e-2ae4b944f765"><DocumentWindow Key="C:\msys64\home\mvaittinen\gits\tetrao-urogallus\bd18398\platform\Cypress-PSoC\firmware\bd18398-demo.cydsn\src\main.c" Guid="d314a0ae-3c59-4eb9-958e-881cf2b0a1eb" /><DocumentWindow Key="C:\msys64\home\mvaittinen\gits\tetrao-urogallus\bd18398\platform\Cypress-PSoC\firmware\bd18398-demo.cydsn\src\bd18398_demo\led_ic_usage_example.c" Guid="8c107f76-6013-4a48-9d01-28d77a1a2fa5" /><DocumentWindow Key="C:\msys64\home\mvaittinen\gits\tetrao-urogallus\bd18398\platform\Cypress-PSoC\firmware\bd18398-demo.cydsn\src\bd18398_demo\bd18398_led.c" Guid="04e44ef5-9704-4236-84c1-160a185a75c0" /><DocumentWindow Key="C:\msys64\home\mvaittinen\gits\tetrao-urogallus\bd18398\platform\Cypress-PSoC\firmware\bd18398-demo.cydsn\src\bd18398_demo\bd18398_led.h" Guid="dd4c4858-bb3a-4fdb-842d-29438acd2e5e" /><DocumentWindow Key="C:\msys64\home\mvaittinen\gits\tetrao-urogallus\bd18398\platform\Cypress-PSoC\firmware\bd18398-demo.cydsn\src\bd18398_demo\bd18398_faults.c" Guid="f4503687-2a54-4859-865e-2ae4b944f765" /><DocumentWindow Key="C:\msys64\home\mvaittinen\gits\tetrao-urogallus\bd18398\platform\Cypress-PSoC\firmware\bd18398-demo.cydsn\src\bd18398_demo\led_demo_led.c" Guid="0f947c2d-5c94-4768-8de9-4f888f45a878" /><DocumentWindow Key="C:\msys64\home\mvaittinen\gits\tetrao-urogallus\bd18398\platform\Cypress-PSoC\firmware\bd18398-demo.cydsn\src\bd18398_demo\bd18398_evk.c" Guid="b4f33b63-86af-481c-937a-ae1aaf347726" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="2946, 1071" SelectedTabbedMdiWindow="f4503687-2a54-4859-865e-2ae4b944f765"><DocumentWindow Key="C:\msys64\home\mvaittinen\gits\tetrao-urogallus\bd18398\platform\Cypress-PSoC\firmware\bd18398-demo.cydsn\src\main.c" Guid="d314a0ae-3c59-4eb9-958e-881cf2b0a1eb" /><DocumentWindow Key="C:\msys64\home\mvaittinen\gits\tetrao-urogallus\bd18398\platform\Cypress-PSoC\firmware\bd18398-demo.cydsn\src\bd18398_demo\led_ic_usage_example.c" Guid="8c107f76-6013-4a48-9d01-28d77a1a2fa5" /><DocumentWindow Key="C:\msys64\home\mvaittinen\gits\tetrao-urogallus\bd18398\platform\Cypress-PSoC\firmware\bd18398-demo.cydsn\src\bd18398_demo\bd18398_led.c" Guid="04e44ef5-9704-4236-84c1-160a185a75c0" /><DocumentWindow Key="C:\msys64\home\mvaittinen\gits\tetrao-urogallus\bd18398\platform\Cypress-PSoC\firmware\bd18398-demo.cydsn\src\bd18398_demo\bd18398_led.h" Guid="dd4c4858-bb3a-4fdb-842d-29438acd2e5e" /><DocumentWindow Key="C:\msys64\home\mvaittinen\gits\tetrao-urogallus\bd18398\platform\Cypress-PSoC\firmware\bd18398-demo.cydsn\src\bd18398_demo\bd18398_faults.c" Guid="f4503687-2a54-4859-865e-2ae4b944f765" /><DocumentWindow Key="C:\msys64\home\mvaittinen\gits\tetrao-urogallus\bd18398\platform\Cypress-PSoC\firmware\bd18398-demo.cydsn\src\bd18398_demo\led_demo_led.c" Guid="0f947c2d-5c94-4768-8de9-4f888f45a878" /><DocumentWindow Key="C:\msys64\home\mvaittinen\gits\tetrao-urogallus\bd18398\platform\Cypress-PSoC\firmware\bd18398-demo.cydsn\src\bd18398_demo\bd18398_evk.c" Guid="b4f33b63-86af-481c-937a-ae1aaf347726" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="9bfcc075-35ef-4f83-b0e7-341c05b4bce5" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="Release" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
