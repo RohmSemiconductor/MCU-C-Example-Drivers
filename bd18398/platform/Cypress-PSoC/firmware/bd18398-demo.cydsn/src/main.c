@@ -72,8 +72,8 @@ int main(void)
 	led_demo_set_config();
 
 	for (;;) {
-		static int i = 0;
-		int loop = i % 10000;
+		static unsigned int i = 0;
+		int loop = i % 100000;
 
 		led_demo_loop();
 
