@@ -95,5 +95,4 @@ bool led_demo_button_pushed()
 void ack_button_irq()
 {
 	GPIO_P1_1_SetInterruptMode(GPIO_P1_1_0_INTR, GPIO_P1_1_INTR_RISING);
-	printf("Button IRQ - debounce\r\n");
 }
