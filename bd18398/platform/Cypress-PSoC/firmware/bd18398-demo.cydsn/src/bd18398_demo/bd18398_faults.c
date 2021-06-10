@@ -54,27 +54,29 @@ bool is_failure_detected(uint8_t * status)
 /* Default error handlers - override these to do something meaningfull */
 static void handle_uvlo()
 {
-	/* Turn off all LED VOUTs and set them faulty */
-	evk_fault_all_leds();
+	/*
+	 * The fault_all_leds() should be reworked to 
+	 * not set the SHORT / OPEN bits because that will
+	 * mess the orange bard LED state with this demo code.
+	 *
+	 * Also, we don't turn off faulty LEDs here as the version of
+	 * demo EVK can cause bogus OPEN errors.
+	 */
+	/* evk_fault_all_leds(); */
 	limited_print("UVLO\r\n", 1000);
-	/* TODO: indicate fault using LED#2 on EVK board */
 	led_demo_err_led_blink_if_free(false);
 }
 
 static void handle_pinuvlo()
 {
 	limited_print("PVIN_UVLO\r\n", 1000);
-	evk_fault_all_leds();
-	/* TODO: indicate fault using LED#2 on EVK board */
+	/* evk_fault_all_leds();*/
 	led_demo_err_led_blink_if_free(false);
 }
 
 static void handle_crc()
 {
-	static int first = 0;
-
-	if (first)
-		limited_print("CRC\r\n", 1000);
+	limited_print("CRC\r\n", 1000);
 }
 
 /** handle_errors - call error handler functions for present errors
