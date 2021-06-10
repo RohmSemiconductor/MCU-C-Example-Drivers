@@ -57,7 +57,7 @@
 #define BD18398_LED_DIMSET_REG		0x3
 
 /* The LED current (units of mA) when brightness is set to max */
-#define BD18398_MAX_LED_CURRENT		1000UL
+#define BD18398_MAX_LED_CURRENT		500UL
 
 /* A/D full scale reference voltage uV */
 #define BD18398_ADC_VREF		2500000
