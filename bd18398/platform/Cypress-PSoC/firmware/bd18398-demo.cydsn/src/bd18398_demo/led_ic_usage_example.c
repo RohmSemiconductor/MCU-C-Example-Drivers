@@ -57,7 +57,7 @@ enum standalone_state {
 	STANDALONE_PUSH2_CH3LIT,
 	STANDALONE_PUSH3_RAMP_ALL,
 	STANDALONE_PUSH4_RAMP_ONE,
-	STANDALONE_PUSH5_LIMB,
+	STANDALONE_PUSH5_LIMP,
 	STANDALONE_STATE_LAST,
 };
 
@@ -158,11 +158,11 @@ static void led_demo_set_state5(void)
 
 	/* Here we just turn OFF the LEDs. The event loop does not
 	 * poll status registers while we stay in this state so after
-	 * 1 sec the IC should go to LIMB-HOME mode
+	 * 1 sec the IC should go to LIMP-HOME mode
 	 */
 
 	printf
-	    ("Set state 6 - LIMB HOME - Set all channels OFF and stop polling\r\n");
+	    ("Set state 6 - LIMP HOME - Set all channels OFF and stop polling\r\n");
 	evk_led_set_state(0, LED_OFF, LED_TIMING_START);
 	evk_led_set_state(1, LED_OFF, LED_TIMING_START);
 	evk_led_set_state(2, LED_OFF, LED_TIMING_START);
@@ -186,11 +186,11 @@ void led_demo_loop(void)
 
 	/*
 	 * Poll the status registers (and ping watchdog) if we are not in demo
-	 * mode representing the limb-home mode. If we are in limb-home demo
+	 * mode representing the limp-home mode. If we are in limp-home demo
 	 * mode, then we skip polling which will eventually cause watchdog
-	 * to trigger and transfer the IC to limb-home mode.
+	 * to trigger and transfer the IC to limp-home mode.
 	 */
-	if (state != STANDALONE_PUSH5_LIMB) {
+	if (state != STANDALONE_PUSH5_LIMP) {
 		/*
 		 * Update the LED channel outputs - blink, fade etc depending
 		 * on demo mode.
@@ -271,7 +271,7 @@ void led_demo_loop(void)
 		case STANDALONE_PUSH4_RAMP_ONE:
 			led_demo_set_state4();
 			break;
-		case STANDALONE_PUSH5_LIMB:
+		case STANDALONE_PUSH5_LIMP:
 			led_demo_set_state5();
 			break;
 		default:

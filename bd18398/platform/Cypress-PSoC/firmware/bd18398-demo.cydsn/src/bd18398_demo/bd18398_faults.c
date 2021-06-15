@@ -38,7 +38,7 @@
  *
  * Query the LED IC status and feed the watchdog. This must be called more
  * frequently than once/second or IC assumes communication failure and
- * enters to LIMB HOME mode.
+ * enters to LIMP HOME mode.
  *
  * Returns:	true if LED IC has detected failure. False if everything is Ok.
  */
