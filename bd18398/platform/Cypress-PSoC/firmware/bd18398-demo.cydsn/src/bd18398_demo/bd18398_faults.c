@@ -76,7 +76,7 @@ static void handle_pinuvlo()
 
 static void handle_crc()
 {
-	limited_print("CRC\r\n", 1000);
+	limited_print("CRC ERROR\r\n", 1000);
 }
 
 /** handle_errors - call error handler functions for present errors
