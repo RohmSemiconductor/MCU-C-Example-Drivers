@@ -105,22 +105,22 @@ uint32_t led_demo_get_counter(void);
 #define ARRAY_SIZE(arr) (sizeof(arr)/sizeof(arr[0]))
 #endif
 
-#define limited_print(foo, lim)		\
-{					\
-	static int __plaaplaa = 0;	\
-					\
-	if (!(__plaaplaa % (lim)))	\
-		printf(foo);		\
-	__plaaplaa++;			\
+#define limited_print(foo, lim)			\
+{						\
+	static unsigned int __plaaplaa = 0;	\
+						\
+	if (!(__plaaplaa % (lim)))		\
+		printf(foo);			\
+	__plaaplaa++;				\
 }
 
-#define limited_print2(foo, bar, lim)	\
-{					\
-	static int __plaaplaa = 0;	\
-					\
-	if (!(__plaaplaa % (lim)))	\
-		printf(foo, bar);	\
-	__plaaplaa++;			\
+#define limited_print2(foo, bar, lim)		\
+{						\
+	static unsigned int __plaaplaa = 0;	\
+						\
+	if (!(__plaaplaa % (lim)))		\
+		printf(foo, bar);		\
+	__plaaplaa++;				\
 }
 
 #endif
